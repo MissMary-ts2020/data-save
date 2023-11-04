@@ -1,6 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS 1
 #include <stdio.h>
 
+int showSystemDaxiao() {
+	int c = 1;
+	char* pc = (char*)&c;//只是为了取第一个字节的目的
+	//判断第一个字节是1还是0
+	return (int)*pc;
+}
+
 int main() {
 
 	/*int a = 0x12345678;
@@ -32,10 +39,8 @@ int main() {
 	*/
 
 	//判断机器是小端存储还是大端存储
-	int c = 1;
-	char* pc = &c;
-	//判断第一个字节是1还是0
-	switch ((int)*pc) {//取出的是内存实际存储的内容
+	
+	switch (showSystemDaxiao()) {
 	case 1:
 		printf("小端");
 		break;
@@ -43,9 +48,9 @@ int main() {
 		printf("大端");
 		break;
 	default:
+		printf("error");
 		break;
 	}
-
 
 	return NULL;
 }
